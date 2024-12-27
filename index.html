@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="tj">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Барномаи компютерӣ барои моделсозии кори автобус шаҳри Хуҷанд</title>
+    <link rel="stylesheet" href="leaflet.css">
+    <script src="leaflet.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 28px;
+        }
+        #login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #333;
+            color: white;
+        }
+        #login-box {
+            background-color: #444;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            width: 300px;
+            text-align: center;
+        }
+        #login-box input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 4px;
+        }
+        #login-box button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #login-box button:hover {
+            background-color: #45a049;
+        }
+        #map {
+            width: 100%;
+            height: 400px;
+            margin: 20px 0;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+        .info-section {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+
+<div id="login-container">
+    <div id="login-box">
+        <h2>Даромад ба барнома</h2>
+        <input type="text" id="username" placeholder="Логин" required>
+        <input type="password" id="password" placeholder="Пароль" required>
+        <button onclick="login()">Даромад</button>
+        <p id="error-message" style="color: red; display: none;">Хато кардед</p>
+    </div>
+</div>
+
+<script>
+    function login() {
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        if (username === "admin" && password === "1234") {
+            document.getElementById("login-container").style.display = "none";
+            document.getElementById("main-content").style.display = "block";
+        } else {
+            document.getElementById("error-message").style.display = "block";
+        }
+    }
+</script>
+
+<div id="main-content" style="display: none;">
+    <header>
+        <h1>Барномаи компютерӣ барои моделсозии кори автобус шаҳри Хуҷанд</h1>
+    </header>
+
+    <section class="info-section">
+        <h2>Харитаи ҳаракат</h2>
+        <div id="map"></div>
+        <script>
+            var map = L.map('map').setView([40.2858, 69.6220], 13);
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 18,
+            }).addTo(map);
+        </script>
+    </section>
+
+    <section class="info-section">
+        <h2>Маълумоти умумӣ</h2>
+        <p>Моделсозии кори автобус — ин як соҳаи муҳими нақлиёт мебошад, ки мақсади он такмили самаранокии кор ва хизматрасонии автобусҳоро дар шаҳрҳо ва ноҳияҳо мебошад. Барномаи компютерии моделсозии кори автобус имкон медиҳад, ки муҳити воқеии кор дар соҳаи нақлиёт модел шавад, то таҳлил ва оптимизатсия барои беҳтар намудани фаъолияти он таъмин гардад..</p>
+    </section>
+
+
+    <h1>Маршрути автобус дар шахри Худжанд</h1>
+
+    <div class="bus-route">
+        <div class="bus-number">Автобуси №119</div>
+        <div class="route-info">Маршрут: бозори Панҷшанбе – Ботанический сад</div>
+        <div class="route-info">Остановка:</div>
+        <ul class="stop-list">
+            <li>бозори Панҷшанбе
+                <ul class="time-list">
+                    <li>08:00, 08:30, 09:00</li>
+                </ul>
+            </li>
+            <li>Автовокзал
+                <ul class="time-list">
+                    <li>08:10, 08:40, 09:10</li>
+                </ul>
+            </li>
+            <li>Плошади Свобода
+                <ul class="time-list">
+                    <li>08:20, 08:50, 09:20</li>
+                </ul>
+            </li>
+            <li>Ботанический сад
+                <ul class="time-list">
+                    <li>08:30, 09:00, 09:30</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+
+    <div class="bus-route">
+        <div class="bus-number">Автобуси №92</div>
+        <div class="route-info">Маршрут: Микрорайон 19 – шахри Гулистон</div>
+        <div class="route-info">Остановка:</div>
+        <ul class="stop-list">
+            <li>Микрорайон 19
+                <ul class="time-list">
+                    <li>08:05, 08:35, 09:05</li>
+                </ul>
+            </li>
+            <li>Парк Победы
+                <ul class="time-list">
+                    <li>08:15, 08:45, 09:15</li>
+                </ul>
+            </li>
+            <li>бозори Панҷшанбе
+                <ul class="time-list">
+                    <li>08:25, 08:55, 09:25</li>
+                </ul>
+            </li>
+            <li>шахри Гулистон
+                <ul class="time-list">
+                    <li>08:40, 09:10, 09:40</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    
+    <div class="bus-route">
+        <div class="bus-number">Автобуси №86</div>
+        <div class="route-info">Маршрут: Микрорайон 20 – Маркази парк</div>
+        <div class="route-info">Остановка:</div>
+        <ul class="stop-list">
+            <li>Микрорайон 20
+                <ul class="time-list">
+                    <li>08:10, 08:40, 09:10</li>
+                </ul>
+            </li>
+            <li>Площади Водопадов
+                <ul class="time-list">
+                    <li>08:20, 08:50, 09:20</li>
+                </ul>
+            </li>
+            <li>парки Победа
+                <ul class="time-list">
+                    <li>08:30, 09:00, 09:30</li>
+                </ul>
+            </li>
+            <li>парки Призиденти
+                <ul class="time-list">
+                    <li>08:40, 09:10, 09:40</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+
+
+
+    <section class="info-section">
+        <h2>Таҳлил</h2>
+        <p>Ҳар як қитъа дар харита таҳлил карда мешавад, то ки маълумоти аниқ дар бораи ҳаракат пешниҳод карда шавад.</p>
+        <p>Барнома ба истифодабарандагон имконияти дидани суръати ҳаракат ва вазъияти умумии роҳро фароҳам меорад.</p>
+    </section>
+
+    <section class="info-section">
+        <h2>Тамос</h2>
+        <p>Барои маълумоти бештар, лутфан ба мо муроҷиат кунед. Мо омодаем ба ҳама саволҳои шумо ҷавоб диҳем ва кӯмак расонем.</p>
+        <h3>ссылкахои истифодашуда https://leafletjs.com </h3>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Барномаи компютерӣ барои моделсозии кори автобус 
+            Тамос +992987777527
+        </p>
+    </footer>
+</div>
+
+</body>
+</html>
